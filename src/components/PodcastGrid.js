@@ -94,12 +94,22 @@ export default function PodcastGrid({ episodes }) {
 
                 {/* Badges d'information */}
                 <div className="flex flex-wrap gap-4 text-sm text-lavender-grey">
-                  <span className="px-4 py-2 bg-white/5 rounded-full border border-white/10">
-                    {ep.status}
-                  </span>
+                  
+                  {/* Badge de Date Dynamique */}
+                  {ep.date && (
+                    <span className="px-4 py-2 bg-white/5 rounded-full border border-white/10">
+                      {new Date(ep.date).toLocaleDateString("fr-FR", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                      })}
+                    </span>
+                  )}
+
+                  {/* Badge de Durée */}
                   {ep.duration && (
                     <span className="px-4 py-2 bg-white/5 rounded-full border border-white/10">
-                      {ep.duration} ''
+                      ⏱ {ep.duration}
                     </span>
                   )}
                 </div>

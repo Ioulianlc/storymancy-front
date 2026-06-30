@@ -1,5 +1,19 @@
 @import "tailwindcss";
+@layer base {
+  /* On force la police Playfair quand on utilise la classe .font-serif */
+  .font-serif {
+    font-family: var(--font-playfair), ui-serif, Georgia, serif !important;
+  }
 
+  /* On force la police DM Sans pour tout le reste (sans-serif) */
+  .font-sans {
+    font-family: var(--font-dmsans), ui-sans-serif, system-ui, sans-serif !important;
+  }
+}
+@theme {
+  --font-sans: var(--font-dmsans);
+  --font-serif: var(--font-playfair);
+}
 @theme {
   --color-ink-black: #080E1C;
   --color-ink-black-light: #0D1526;
