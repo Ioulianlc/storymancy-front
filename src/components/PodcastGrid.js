@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 
 export default function PodcastGrid({ episodes }) {
   // L'état qui mémorise la catégorie cliquée (par défaut "Tous")
@@ -23,16 +22,25 @@ export default function PodcastGrid({ episodes }) {
       : episodes.filter((ep) => ep.category === activeCategory);
 
   return (
-    <div className="w-full flex flex-col items-start w-full">
+    <div className="w-full flex flex-col items-start">
       {/* --- BARRE DE FILTRES --- */}
-      <div className="w-full border-y border-white/20 py-6 mb-12 flex flex-col md:flex-row justify-between items-center gap-6">
-        {/* Les boutons de catégories */}
-        <div className="flex flex-wrap gap-8 md:gap-12 font-sans text-white text-base md:text-lg">
+      {/* py-6 mb-12 flex flex-col md:flex-row justify-between items-center gap-6 */}
+      <div className="w-full border-y border-white/20 py-6 mb-12 flex flex-col md:flex-row justify-between items-center gap-6 overflow-hidden">
+        
+        {/* 🎯 LE CARROUSEL MOBILE : 
+            - w-full : prend toute la largeur
+            - flex-nowrap : interdit de passer à la ligne
+            - overflow-x-auto : active le glissement au doigt sur mobile
+            - scrollbar-none : (optionnel selon ta config) masque la barre de défilement brute
+            - md:overflow-visible / md:flex-wrap : redevient normal sur ordinateur
+        */}
+        
+        <div className="w-full md:w-auto flex flex-nowrap md:flex-wrap gap-8 md:gap-12 font-sans text-white text-base md:text-lg overflow-x-auto md:overflow-visible scrollbar-none pb-4 md:pb-0 snap-x">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`pb-2 transition-colors duration-300 ${
+              className={`pb-2 transition-colors duration-300 flex-shrink-0 snap-start ${
                 activeCategory === cat
                   ? "border-b-2 border-honey-bronze text-white" // Style actif (Souligné doré)
                   : "text-lavender-grey hover:text-white" // Style inactif
@@ -43,8 +51,8 @@ export default function PodcastGrid({ episodes }) {
           ))}
         </div>
 
-        {/* Le compteur d'épisodes dynamique */}
-        <div className="text-sm text-lavender-grey font-sans">
+        {/* Le compteur d'épisodes dynamique (Reste bien calé à droite sur desktop) */}
+        <div className="text-sm text-lavender-grey font-sans flex-shrink-0 self-end md:self-center">
           {filteredEpisodes.length} épisode(s)
         </div>
       </div>
@@ -75,8 +83,7 @@ export default function PodcastGrid({ episodes }) {
               {/* Contenu de l'épisode */}
               <div className="flex flex-col flex-grow">
                 <span className="text-honey-bronze font-serif italic mb-2">
-                  Épisode {ep.episode_number || ep.id} •{" "}
-                  {ep.category || "Général"}
+                  Épisode {ep.episode_number || ep.id} • {ep.category || "Général"}
                 </span>
                 <h3 className="text-2xl md:text-3xl text-white font-sans mb-4">
                   {ep.name}
@@ -92,7 +99,7 @@ export default function PodcastGrid({ episodes }) {
                   </span>
                   {ep.duration && (
                     <span className="px-4 py-2 bg-white/5 rounded-full border border-white/10">
-                      ⏱ {ep.duration}
+                      {ep.duration} ''
                     </span>
                   )}
                 </div>

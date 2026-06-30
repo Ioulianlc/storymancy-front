@@ -5,7 +5,8 @@ export default function Home() {
   return (
     <main className="w-full flex flex-col items-center">
       {/* --- SECTION 1 : HERO (Conteneur Pleine Largeur pour le Dégradé) --- */}
-      <section className="relative w-full overflow-hidden mt-32 md:mt-40 py-24 px-8 bg-[radial-gradient(circle_at_center,var(--color-ink-black-light)_40%,var(--color-ink-black)_100%)]">
+      <section className="relative w-full overflow-hidden mt-16 md:mt-20 py-12
+       px-8 bg-[radial-gradient(circle_at_center,var(--color-ink-black-light)_40%,var(--color-ink-black)_100%)]">
         {/* --- LE GIMMICK (Flotte au milieu de l'écran, chargé en priorité absolue) --- */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 w-[800px] max-w-full opacity-40 pointer-events-none">
           <Image
